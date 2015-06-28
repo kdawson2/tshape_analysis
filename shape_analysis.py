@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # tshape_analysis - Code for the analysis of tongue shape contours
 # Copyright (C) 2015 Katherine Dawson <kmdawson8@gmail.com>
 
@@ -13,8 +15,6 @@
 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-#!/usr/bin/python
 
 import glob
 import numpy as np
