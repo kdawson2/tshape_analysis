@@ -43,7 +43,9 @@ The code is written in Python.
 * If you use the terminal window, type in the file path (including the filename) for ‘shape_analysis.py’. Press Enter to execute the script.
 * If you are in Python, type: `import shape_analysis` then `shape_analysis.doIt()`
 
+## Test data
 
+Contained in the ‘test data’ folder of this repository are a number of .csv files with tongue contours for various shapes. The filenames are constructed as required by the script - i.e. ’01FC’ is the participant ID, and ‘ara’ etc. is the utterance. For all of these files, the tongue contours represent the midpoint of the middle segment of the utterance, i.e. /r/, /l/, /g/ etc. There are 6 repetitions of each segment type. The data is in the mid-sagittal plane, collected from a typical, female speaker of American English.
 
 
 **The authors make no promise of continued support or development of the code contained in this repository.**
