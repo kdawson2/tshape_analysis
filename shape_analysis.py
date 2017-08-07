@@ -22,7 +22,7 @@ import math
 import os
 import csv
 
-from scipy.integrate import cumtrapz, simps
+from scipy.integrate import simps
 from scipy.signal import butter, filtfilt
 
 
@@ -51,19 +51,21 @@ def procrustes(a, b):
 
 def curvature_index(data):
 
-  grad = np.gradient(data[:,1],np.gradient(data[:,0]))
-  ta = np.arctan2(np.gradient(data[:,1]),np.gradient(data[:,0]))
-    
-  vvx = np.cumsum(np.abs(np.diff(data[:,0])))
-  vvx = np.insert(vvx,0,0)
+  # compute signed curvature
+  dx = np.gradient(data[:,0])
+  dy = np.gradient(data[:,1])
+  ddx = np.gradient(dx)
+  ddy = np.gradient(dy)
+  cur = (dx * ddy - dy * ddx) / (dx**2 + dy**2)**1.5;
 
-  s = cumtrapz((1+grad**2.)**0.5,vvx)
+  s = np.cumsum(np.sqrt(np.sum(np.diff(data,axis=0)**2,axis=1)))
   s = np.insert(s,0,0)
 
-  cur = np.gradient(ta, np.gradient(s))
-
   b, a = butter(5,1./4.)
-  fcur = filtfilt(b, a, cur)
+  n = len(data)
+  r = cur[::-1]
+  fcur = filtfilt(b, a, np.concatenate((r,cur,r)))
+  fcur = fcur[n:-n]
 
   fcurA = np.abs(fcur)
   mci = simps(fcurA,s)
